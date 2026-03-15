@@ -6,14 +6,23 @@
     <script> /* copilot failed me so thx chatgpt */
 document.addEventListener("DOMContentLoaded", () => {
 
-const sliders = {
+/* const sliders = {
   masc: { id: 'masc', color: 'linear-gradient(45deg,#336AFF,#5B8CFF)' },
   fem: { id: 'fem', color: 'linear-gradient(45deg,#FF69B4,#FF80BF)' },
   nb: { id: 'nb', color: 'linear-gradient(45deg,#FFD700,#FFF200)' },
   agender: { id: 'agender', color: 'linear-gradient(45deg,#0CFF6B,#16E000)' },
   fluid: { id: 'fluid', color: 'linear-gradient(45deg,#DA70D6,#c870da)' },
   other: { id: 'other', color: 'linear-gradient(45deg,#A9A9A9,#C2C2C2)' }
-};
+}; */
+
+  const sliders = {
+    masc: { id: 'other', color: '#336AFF' },
+    fem: { id: 'other', color: '#FF69B4' },
+    nb: { id: 'other', color: '#FFD700' },
+    agender: { id: 'other', color: '#0CFF6B' },
+    fluid: { id: 'other', color: '#DA70D6' },
+    other: { id: 'other', color: '#A9A9A9' },
+  } /* my fault lol */
 
 function updateGenderBar() {
   const values = {};
