@@ -88,6 +88,32 @@ updateGenderBar();
   link.click();
 }
       document.getElementById("exportBtn").addEventListener("click", exportGenFile);
+
+      function importGenFile(event) {
+  const file = event.target.files[0];
+  if (!file) return;
+
+  const reader = new FileReader();
+
+  reader.onload = function(e) {
+    const data = JSON.parse(e.target.result);
+
+    const traits = data.timeline[0].traits;
+
+    Object.keys(traits).forEach(key => {
+      if (sliders[key]) {
+        document.getElementById(sliders[key].id).value = traits[key].perc;
+      }
+    });
+
+    updateGenderBar();
+  };
+
+  reader.readAsText(file);
+}
+      document.getElementById("importFile")
+  .addEventListener("change", importGenFile);
+      /* ok im done for today */
 </script>
     <style>
       @import url('https://fonts.googleapis.com/css2?family=Alata&display=swap');
@@ -153,7 +179,7 @@ updateGenderBar();
     <h1>Gen%</h1>
     <div id="genderpercentbar"></div>
     <br>
-    <input type="button" id="exportBtn">Export</input>
+    <input type="button" id="exportBtn">Export</input><input type="file" id="importFile">
     <br>
     <input type="range" id="masc" min="0" max="100" value="0">
     <label for="masc">Masculine;   </label>
@@ -172,7 +198,7 @@ updateGenderBar();
     <footer>
       <hr>
       <p style="font-size: 7pt;">
-        Gender% Board by PeerPlay Experiments<br>Version 0.4.5 Beta<br>Built with care using Github Pages
+        Gender% Board by PeerPlay Experiments<br>Version 0.4.6 Beta<br>Built with care using Github Pages
     </footer>
   </body>
 </html>
