@@ -52,29 +52,6 @@
 
   // Initial update
         updateGenderBar();
-
-        document.getElementById('SUBMIT').addEventListener('click', function() {
-          const values = {};
-          let total = 0;
-
-          Object.keys(sliders).forEach(key => {
-            values[key] = parseInt(document.getElementById(sliders[key].id).value);
-            total += values[key];
-          });
-
-  if (total === 0) {
-    alert('Please adjust at least one slider');
-    return;
-  }
-
-  const percentages = {};
-  Object.keys(sliders).forEach(key => {
-    percentages[key] = ((values[key] / total) * 100).toFixed(2) + '%';
-  });
-
-  console.log(percentages); // Or display this however you want
-  alert(`Your Gender%:\n${Object.entries(percentages).map(([k, v]) => `${k}: ${v}`).join('\n')}`);
-});
     </script>
     <style>
       @import url('https://fonts.googleapis.com/css2?family=Alata&display=swap');
