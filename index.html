@@ -3,56 +3,56 @@
   <head> 
     <title>Gender%</title> 
     <meta charset="UTF-8">
-    <script>
-        /* thanks copilot */ /* alr im back lets test this */
-        const sliders = {
-          masc: { id: 'masc', color: '#336AFF' },
-          fem: { id: 'fem', color: '#FF69B4' },
-          nb: { id: 'nb', color: '#FFD700' },
-          agender: { id: 'agender', color: '#0CFF6B' },
-          fluid: { id: 'fluid', color: '#DA70D6' },
-          other: { id: 'other', color: '#A9A9A9' }
-        };
+    <script> /* copilot failed me so thx chatgpt */
+document.addEventListener("DOMContentLoaded", () => {
 
-        function updateGenderBar() {
-          const values = {};
-          let total = 0;
+const sliders = {
+  masc: { id: 'masc', color: '#336AFF' },
+  fem: { id: 'fem', color: '#FF69B4' },
+  nb: { id: 'nb', color: '#FFD700' },
+  agender: { id: 'agender', color: '#0CFF6B' },
+  fluid: { id: 'fluid', color: '#DA70D6' },
+  other: { id: 'other', color: '#A9A9A9' }
+};
 
-    // Get all slider values
-          Object.keys(sliders).forEach(key => {
-            values[key] = parseInt(document.getElementById(sliders[key].id).value);
-            total += values[key];
-          });
+function updateGenderBar() {
+  const values = {};
+  let total = 0;
 
-          // Prevent division by zero
-          if (total === 0) {
-            document.getElementById('genderpercentbar').style.background = '#333';
-            return;
-          }
+  Object.keys(sliders).forEach(key => {
+    values[key] = parseInt(document.getElementById(sliders[key].id).value);
+    total += values[key];
+  });
 
-          // Build gradient string
-          let gradientStops = [];
-          let currentPosition = 0;
+  if (total === 0) {
+    document.getElementById('genderpercentbar').style.background = '#333';
+    return;
+  }
 
-          Object.keys(sliders).forEach(key => {
-            const percentage = (values[key] / total) * 100;
-            gradientStops.push(`${sliders[key].color} ${currentPosition}%`);
-            currentPosition += percentage;
-            gradientStops.push(`${sliders[key].color} ${currentPosition}%`);
-          });
+  let gradientStops = [];
+  let currentPosition = 0;
 
-          const gradient = `linear-gradient(to right, ${gradientStops.join(', ')})`;
-          document.getElementById('genderpercentbar').style.background = gradient;
-        }
+  Object.keys(sliders).forEach(key => {
+    const percentage = (values[key] / total) * 100;
 
-  // Add event listeners to all sliders
-        Object.keys(sliders).forEach(key => {
-          document.getElementById(sliders[key].id).addEventListener('input', updateGenderBar);
-        });
+    gradientStops.push(`${sliders[key].color} ${currentPosition}%`);
+    currentPosition += percentage;
+    gradientStops.push(`${sliders[key].color} ${currentPosition}%`);
+  });
 
-  // Initial update
-        updateGenderBar();
-    </script>
+  const gradient = `linear-gradient(to right, ${gradientStops.join(', ')})`;
+  document.getElementById('genderpercentbar').style.background = gradient;
+}
+
+Object.keys(sliders).forEach(key => {
+  document.getElementById(sliders[key].id)
+    .addEventListener("input", updateGenderBar);
+});
+
+updateGenderBar();
+
+});
+</script>
     <style>
       @import url('https://fonts.googleapis.com/css2?family=Alata&display=swap');
       .alata-regular {
