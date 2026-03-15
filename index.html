@@ -6,23 +6,14 @@
     <script> /* copilot failed me so thx chatgpt */
 document.addEventListener("DOMContentLoaded", () => {
 
-/* const sliders = {
-  masc: { id: 'masc', color: 'linear-gradient(45deg,#336AFF,#5B8CFF)' },
-  fem: { id: 'fem', color: 'linear-gradient(45deg,#FF69B4,#FF80BF)' },
-  nb: { id: 'nb', color: 'linear-gradient(45deg,#FFD700,#FFF200)' },
-  agender: { id: 'agender', color: 'linear-gradient(45deg,#0CFF6B,#16E000)' },
-  fluid: { id: 'fluid', color: 'linear-gradient(45deg,#DA70D6,#c870da)' },
-  other: { id: 'other', color: 'linear-gradient(45deg,#A9A9A9,#C2C2C2)' }
-}; */
-
-  const sliders = {
-    masc: { id: 'masc', color: '#336AFF' },
-    fem: { id: 'fem', color: '#FF69B4' },
-    nb: { id: 'nb', color: '#FFD700' },
-    agender: { id: 'agender', color: '#0CFF6B' },
-    fluid: { id: 'fluid', color: '#DA70D6' },
-    other: { id: 'other', color: '#A9A9A9' },
-  } /* my fault lol */
+const sliders = {
+  masc: { id: 'masc', color: '#336AFF' },
+  fem: { id: 'fem', color: '#FF69B4' },
+  nb: { id: 'nb', color: '#FFD700' },
+  agender: { id: 'agender', color: '#0CFF6B' },
+  fluid: { id: 'fluid', color: '#DA70D6' },
+  other: { id: 'other', color: '#A9A9A9' },
+};
 
 function updateGenderBar() {
   const values = {};
@@ -60,16 +51,14 @@ Object.keys(sliders).forEach(key => {
 
 updateGenderBar();
 
-});
-      /* start i/o */
-      function exportGenFile() {
+/* EXPORT */
+
+function exportGenFile() {
   const traits = {};
 
   Object.keys(sliders).forEach(key => {
     const value = document.getElementById(sliders[key].id).value;
-    traits[key] = {
-      perc: parseInt(value)
-    };
+    traits[key] = { perc: parseInt(value) };
   });
 
   const genData = {
@@ -80,16 +69,23 @@ updateGenderBar();
     }]
   };
 
-  const blob = new Blob([JSON.stringify(genData, null, 2)], { type: "application/json" });
+  const blob = new Blob(
+    [JSON.stringify(genData, null, 2)],
+    { type: "application/json" }
+  );
 
   const link = document.createElement("a");
   link.href = URL.createObjectURL(blob);
   link.download = "identity.gen%";
   link.click();
 }
-      document.getElementById("exportBtn").addEventListener("click", exportGenFile);
 
-      function importGenFile(event) {
+document.getElementById("exportBtn")
+  .addEventListener("click", exportGenFile);
+
+/* IMPORT */
+
+function importGenFile(event) {
   const file = event.target.files[0];
   if (!file) return;
 
@@ -97,7 +93,6 @@ updateGenderBar();
 
   reader.onload = function(e) {
     const data = JSON.parse(e.target.result);
-
     const traits = data.timeline[0].traits;
 
     Object.keys(traits).forEach(key => {
@@ -111,9 +106,11 @@ updateGenderBar();
 
   reader.readAsText(file);
 }
-      document.getElementById("importFile")
+
+document.getElementById("importFile")
   .addEventListener("change", importGenFile);
-      /* ok im done for today */
+
+});
 </script>
     <style>
       @import url('https://fonts.googleapis.com/css2?family=Alata&display=swap');
