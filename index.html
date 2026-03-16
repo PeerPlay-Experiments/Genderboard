@@ -187,7 +187,7 @@ document.getElementById("importFile")
       #genderpercentbar {
         width: 100%;
         height: 30px;
-        background-color: #333;
+        background-color: linear-gradient(45deg,#333,#333 10px,#444 10px,#444 20px);
         border-radius: 10px;
         overflow: hidden;
         border: 1px solid rgba(255,255,255,0.1);
@@ -227,7 +227,7 @@ document.getElementById("importFile")
     </style>
   </head>
   <body>
-    <div class="pane">
+    <div class="panel">
     <h1>Gen%</h1>
     <div id="genderpercentbar"></div>
     <br>
@@ -242,7 +242,7 @@ document.getElementById("importFile")
     <input type="range" id="agender" min="0" max="100" value="0">
     <label for="agender">Agender - <b><span id="agenderVal" style="color:#0CF34A">0%</span></b>;   </label>
     <input type="range" id="fluid" min="0" max="100" value="0">
-    <label for="fluid">Genderfluid - </b><span id="fluidVal" style="color:#DA70D6">0%</span></b>;   </label>
+    <label for="fluid">Genderfluid - <b><span id="fluidVal" style="color:#DA70D6">0%</span></b>;   </label>
     <input type="range" id="other" min="0" max="100" value="0">
     <label for="other">Other - <b><span id="otherVal" style="color:#A9A9A9">0%</span></b></label>
 
@@ -250,7 +250,7 @@ document.getElementById("importFile")
     <footer>
       <hr>
       <p style="font-size: 7pt;">
-        Gender% Board by PeerPlay Experiments<br>Version 0.6.0<br>Built with care using GitHub Pages
+        Gender% Board by PeerPlay Experiments<br>Version 0.6.3<br>Built with care using GitHub Pages
     </footer>
     </div>
   </body>
