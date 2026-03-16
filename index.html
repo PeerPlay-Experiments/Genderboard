@@ -25,12 +25,48 @@ function updateGenderBar() {
     total += values[key];
   });
 
+// Collect slider values
+let values = {};
+let total = 0;
+
 Object.keys(sliders).forEach(key => {
-  const value = document.getElementById(sliders[key].id).value;
+  const value = Number(document.getElementById(sliders[key].id).value);
+  values[key] = value;
+  total += value;
+});
+
+// Normalize values
+let normalized = {};
+let remainders = [];
+let floorSum = 0;
+
+Object.keys(sliders).forEach(key => {
+  const exact = total > 0 ? (values[key] / total) * 100 : 0;
+  const floorVal = Math.floor(exact);
+
+  normalized[key] = floorVal;
+  floorSum += floorVal;
+
+  remainders.push({
+    key: key,
+    remainder: exact - floorVal
+  });
+});
+
+// Distribute leftover %
+let leftover = 100 - floorSum;
+
+remainders
+  .sort((a, b) => b.remainder - a.remainder)
+  .slice(0, leftover)
+  .forEach(item => normalized[item.key]++);
+
+// Update labels
+Object.keys(sliders).forEach(key => {
   const label = document.getElementById(key + "Val");
 
   if (label) {
-    label.textContent = value + "%";
+    label.textContent = normalized[key] + "%";
     label.style.color = sliders[key].color;
   }
 });
