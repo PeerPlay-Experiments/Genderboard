@@ -25,6 +25,16 @@ function updateGenderBar() {
     total += values[key];
   });
 
+Object.keys(sliders).forEach(key => {
+  const value = document.getElementById(sliders[key].id).value;
+  const label = document.getElementById(key + "Val");
+
+  if (label) {
+    label.textContent = value + "%";
+    label.style.color = sliders[key].color;
+  }
+});
+  
   if (total === 0) {
     document.getElementById('genderpercentbar').style.background = '#333';
     return;
@@ -48,6 +58,8 @@ function updateGenderBar() {
 Object.keys(sliders).forEach(key => {
   document.getElementById(sliders[key].id)
     .addEventListener("input", updateGenderBar);
+
+  
 });
 
 updateGenderBar();
@@ -207,7 +219,6 @@ document.getElementById("importFile")
   backdrop-filter: blur(10px);
   box-shadow: 0 10px 30px rgba(0,0,0,0.6);
 }
-      
     </style>
   </head>
   <body>
@@ -218,23 +229,23 @@ document.getElementById("importFile")
     <input type="button" id="exportBtn" value="Export"><input type="file" id="importFile">
     <br>
     <input type="range" id="masc" min="0" max="100" value="0">
-    <label for="masc">Masculine;   </label>
+    <label for="masc">Masculine - <b><span id="mascVal" style="color:#336AFF">0%</span></b>;   </label>
     <input type="range" id="fem" min="0" max="100" value="0">
-    <label for="fem">Feminine;   </label>
+    <label for="fem">Feminine - <b><span id="femVal" style="color:#FF69B4">0%</span></b>;   </label>
     <input type="range" id="nb" min="0" max="100" value="0">
-    <label for="nb">Non-Binary;   </label>
+    <label for="nb">Non-Binary - <b><span id="nbVal" style="color:#FFD700">0%</span></b>;   </label>
     <input type="range" id="agender" min="0" max="100" value="0">
-    <label for="agender">Agender;   </label>
+    <label for="agender">Agender - <b><span id="agenderVal" style="color:#0CF34A">0%</span></b>;   </label>
     <input type="range" id="fluid" min="0" max="100" value="0">
-    <label for="fluid">Genderfluid;   </label>
+    <label for="fluid">Genderfluid - </b><span id="fluidVal" style="color:#DA70D6">0%</span></b>;   </label>
     <input type="range" id="other" min="0" max="100" value="0">
-    <label for="other">Other</label>
+    <label for="other">Other - <b><span id="otherVal" style="color:#A9A9A9">0%</span></b></label>
 
     <br><br>
     <footer>
       <hr>
       <p style="font-size: 7pt;">
-        Gender% Board by PeerPlay Experiments<br>Version 0.5.4<br>Built with care using GitHub Pages
+        Gender% Board by PeerPlay Experiments<br>Version 0.5.8<br>Built with care using GitHub Pages
     </footer>
     </div>
   </body>
