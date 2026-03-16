@@ -26,11 +26,16 @@ function updateGenderBar() {
   });
 
 Object.keys(sliders).forEach(key => {
-  const value = document.getElementById(sliders[key].id).value;
   const label = document.getElementById(key + "Val");
 
   if (label) {
-    label.textContent = value + "%";
+    let percent = 0;
+
+    if (total > 0) {
+      percent = Math.round((values[key] / total) * 100);
+    }
+
+    label.textContent = percent + "%";
     label.style.color = sliders[key].color;
   }
 });
@@ -245,7 +250,7 @@ document.getElementById("importFile")
     <footer>
       <hr>
       <p style="font-size: 7pt;">
-        Gender% Board by PeerPlay Experiments<br>Version 0.5.8<br>Built with care using GitHub Pages
+        Gender% Board by PeerPlay Experiments<br>Version 0.6.0<br>Built with care using GitHub Pages
     </footer>
     </div>
   </body>
