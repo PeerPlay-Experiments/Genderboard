@@ -212,7 +212,7 @@ document.getElementById("importFile")
         font-family: Alata, SF Pro, Arial, sans-serif;
       }
       .panel {
-  max-width: 650px;
+  max-width: 90%;
   margin: 40px auto;
   padding: 25px;
 
@@ -232,7 +232,8 @@ document.getElementById("importFile")
     <div id="genderpercentbar"></div>
     <br>
     <input type="button" id="exportBtn" value="Export"><input type="file" id="importFile">
-    <br>
+    <br><br><br>
+      <span class="panel">
     <input type="range" id="masc" min="0" max="100" value="0">
     <label for="masc">Masculine - <b><span id="mascVal" style="color:#336AFF">0%</span></b>;   </label>
     <input type="range" id="fem" min="0" max="100" value="0">
@@ -245,8 +246,8 @@ document.getElementById("importFile")
     <label for="fluid">Genderfluid - <b><span id="fluidVal" style="color:#DA70D6">0%</span></b>;   </label>
     <input type="range" id="other" min="0" max="100" value="0">
     <label for="other">Other - <b><span id="otherVal" style="color:#A9A9A9">0%</span></b></label>
-
-    <br><br>
+      </span>
+    <br><br><br>
     <footer>
       <hr>
       <p style="font-size: 7pt;">
