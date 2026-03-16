@@ -34,12 +34,23 @@ Object.keys(sliders).forEach(key => {
     label.style.color = sliders[key].color;
   }
 });
-  
+  function normalizeSliders(sliders) {
+  const values = sliders.map(s => parseFloat(s.value));
+  const total = values.reduce((a, b) => a + b, 0);
+
+  return values.map(v => total === 0 ? 0 : (v / total) * 100);
+}
   if (total === 0) {
     document.getElementById('genderpercentbar').style.background = '#333';
     return;
   }
+const sliderElements = document.querySelectorAll(".gender-slider");
+const normalized = normalizeSliders([...sliderElements]);
 
+normalized.forEach((value, i) => {
+  const percent = Math.round(value);
+  document.querySelectorAll(".percent")[i].textContent = percent + "%";
+});
   let gradientStops = [];
   let currentPosition = 0;
 
