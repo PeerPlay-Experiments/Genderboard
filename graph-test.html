@@ -1,0 +1,68 @@
+<h1>This area is under construction! Please be patient.</h1>
+<input
+    id="historyFiles"
+    type="file"
+    multiple
+    accept=".json,.gen%"
+>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script><script>
+
+  const files = [...event.target.files];
+
+for (const file of files) {
+    const text = await file.text();
+    const data = JSON.parse(text);
+}
+  const entries = files.map(async file => {
+    const json = JSON.parse(await file.text());
+
+    return {
+        date: new Date(json.date),
+        scores: json.results
+    };
+});
+
+const history = await Promise.all(entries);
+
+history.sort((a,b)=>a.date-b.date);
+  const traitNames = Object.keys(history[0].scores);
+
+const datasets = traitNames.map(name => ({
+    label: name,
+    data: history.map(entry => ({
+        x: entry.date,
+        y: entry.scores[name]
+    }))
+}));
+  new Chart(canvas, {
+    type: "line",
+    data: {
+        datasets
+    },
+    options: {
+        parsing: false,
+        responsive: true,
+        scales: {
+            x: {
+                type: "time"
+            },
+            y: {
+                min: 0,
+                max: 100
+            }
+        }
+    }
+});
+  function colorFor(name){
+    let hash = 0;
+
+    for(const c of name)
+        hash = (hash*31 + c.charCodeAt(0))|0;
+
+    return `hsl(${Math.abs(hash)%360},70%,55%)`;
+}
+  datasets.map(d => ({
+    ...d,
+    borderColor: colorFor(d.label)
+}));
+</script>
